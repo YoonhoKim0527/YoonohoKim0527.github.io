@@ -12,15 +12,15 @@
 
 # theme                  : "minimal-mistakes-jekyll"
 # remote_theme           : "mmistakes/minimal-mistakes"
-minimal_mistakes_skin    : "default" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
+minimal_mistakes_skin    : "dark" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
 
 # Site Settings
 locale                   : "en-US"
-title                    : "Site Title"
+title                    : "Yoonho Kim's PDAO/Simperby, Rust, Blockchain, Software development Posts"
 title_separator          : "-"
 subtitle                 : # site tagline that appears below site title in masthead
 name                     : "Yoonho Kim"
-description              : "Yoonho Kim's PDAO/Simperby, Rust, Blockchain, Software Posts"
+description              : "Yoonho Kim's PDAO/Simperby, Rust, Blockchain, Software development Posts"
 url                      : "https://YoonhoKim0527.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : "YoonhoKim0527/YoonhoKim0527.github.io"
@@ -107,7 +107,7 @@ author:
   name             : "Yoonho Kim"
   avatar           : "/assets/images/KakaoTalk_Photo_2022-11-13-21-46-08.jpeg"
   bio              : "Start something that you can do"
-  location         : "Somewhere"
+  location         : "Seoul/n POSTECH(POHANG)"
   email            : "hjyang093@gmail.com"
   links:
     - label: "Email"
