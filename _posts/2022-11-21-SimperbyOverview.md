@@ -58,14 +58,14 @@ link of concepts of blockchain : "url", //TODO
 - A block proposer is *faithful* if they fulfill their responsibility and *good* if they don't overuse their power. They are *lazy* and *bad* otherwise.
   The notion of *responsibility* and *power* will be explained [later](#consensus-leader).
 
-1)Simperby는 blockchain의 instance를 build하는 하나의 engine으로써, 이로부터 만들어진 blockchain은 `Simperby Chain`이라고 부른다. 
-2)하나의 단위 상태 변화는 `Transaction`이라고 부른다.
+1)Simperby는 blockchain의 instance를 build하는 하나의 engine으로써, 이로부터 만들어진 blockchain은 `Simperby Chain`이라고 부른다.   
+2)하나의 단위 상태 변화는 `Transaction`이라고 부른다.  
 3)이 `Transaction`들의 나열을 `agenda`라고 한다. 
-이 때 Governance의 투표는 target block height와 agenda에서 진행된다. 
-4)하나의 `block`은 block header와 하나의 agenda를 포함한다. Agenda를 포함하지 않는 block은 허용되지 않는다. 그리고 block은 추가적으로 `extra-agenda-transaction`을 포함할 수 있으며 이는 block 제안자가 추가할 수 있다. 또한 이는 3가지의 type으로 제한이 된다. 
-5)Governance의 participants들은 `members`라고 부른다. 
-6)Consensus의 participants들은 `validators`라고 부르며 이들은 `members`들의 부분집합이다.
-7)한 round의 `consensus leader`는 `block proposer`라고도 불리며 이 사람은 그 round에서 block을 제안하는 validator이다.
-8)`round`라고 하는 것은 consensus leader가 block을 제안하는 기간을 정해주며, 이 시기에 consensus vote들이 이루어진다. consensus vote는 pre-vote, pre-commit이 진행되며 이에 대한 자세한 정보는 tendermint 항목에서 다룰 것이다. 
-9)Validator들은 consensus protocol을 따른다면 정직하거나 비잔틴이 아니어야 할 것이다. 
+이 때 Governance의 투표는 target block height와 agenda에서 진행된다.   
+4)하나의 `block`은 block header와 하나의 agenda를 포함한다. Agenda를 포함하지 않는 block은 허용되지 않는다. 그리고 block은 추가적으로 `extra-agenda-transaction`을 포함할 수 있으며 이는 block 제안자가 추가할 수 있다. 또한 이는 3가지의 type으로 제한이 된다.   
+5)Governance의 participants들은 `members`라고 부른다.   
+6)Consensus의 participants들은 `validators`라고 부르며 이들은 `members`들의 부분집합이다.  
+7)한 round의 `consensus leader`는 `block proposer`라고도 불리며 이 사람은 그 round에서 block을 제안하는 validator이다.  
+8)`round`라고 하는 것은 consensus leader가 block을 제안하는 기간을 정해주며, 이 시기에 consensus vote들이 이루어진다. consensus vote는 pre-vote, pre-commit이 진행되며 이에 대한 자세한 정보는 tendermint 항목에서 다룰 것이다.   
+9)Validator들은 consensus protocol을 따른다면 정직하거나 비잔틴이 아니어야 할 것이다.   
 10)Block을 propose 하는 block proposer or consensus leader는 책임감을 모두 가지고 행동할 시에 `faithful`하다고 하며 그들이 힘을 
