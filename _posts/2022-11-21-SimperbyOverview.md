@@ -32,7 +32,7 @@ in that it provides
  a safe and live mechanism to finalize the state of the organization, which is tolerant to byzantine faults in an asynchronous network.
 2. **Governance**
 a democratic mechanism to make decisions on the organization, which can be finalized by the consensus.
-3. **Communication Channel**
+3. **Communication Channel
 a mechanism to communicate with each other in a decentralized, verifiable, and fault-tolerant way.
 
 즉, Governance에서 단체의 의사 결정을 진행하고 이는 finalized되기 바로 전까지 진행한다. 그 후 Consensus에서 organization의 state를 finalize시킨다. 이 때 Consensus는 asynchronous network상에서 byzantine fault(악의적으로 공격을 하는 것)에 대하여 저항성이 존재한다. 마지막으로 communication channel에서는 탈중앙화되어 있고, 검증 가능하며, 장애 허용성이 있는 방식으로 서로 communicate하는 mechanism을 제공한다. 
@@ -61,13 +61,52 @@ link of concepts of blockchain : "url", //TODO
   The notion of *responsibility* and *power* will be explained [later](#consensus-leader).
 
 1)Simperby는 blockchain의 instance를 build하는 하나의 engine으로써, 이로부터 만들어진 blockchain은 `Simperby Chain`이라고 부른다.   
+
 2)하나의 단위 상태 변화는 `Transaction`이라고 부른다.  
+
 3)이 `Transaction`들의 나열을 `agenda`라고 한다. 
 이 때 Governance의 투표는 target block height와 agenda에서 진행된다.   
+
 4)하나의 `block`은 block header와 하나의 agenda를 포함한다. Agenda를 포함하지 않는 block은 허용되지 않는다. 그리고 block은 추가적으로 `extra-agenda-transaction`을 포함할 수 있으며 이는 block 제안자가 추가할 수 있다. 또한 이는 3가지의 type으로 제한이 된다.   
+
 5)Governance의 participants들은 `members`라고 부른다.   
+
 6)Consensus의 participants들은 `validators`라고 부르며 이들은 `members`들의 부분집합이다.  
+
 7)한 round의 `consensus leader`는 `block proposer`라고도 불리며 이 사람은 그 round에서 block을 제안하는 validator이다.  
+
 8)`round`라고 하는 것은 consensus leader가 block을 제안하는 기간을 정해주며, 이 시기에 consensus vote들이 이루어진다. consensus vote는 pre-vote, pre-commit이 진행되며 이에 대한 자세한 정보는 tendermint 항목에서 다룰 것이다.   
+
 9)Validator들은 consensus protocol을 따른다면 정직하거나 비잔틴이 아니어야 할 것이다.   
-10)Block을 propose 하는 block proposer or consensus leader는 책임감을 모두 가지고 행동할 시에 `faithful`하다고 하며 그들이 힘을 
+
+10)Block을 propose 하는 block proposer or consensus leader는 책임감을 모두 가지고 행동할 시에 `faithful`하다고 하며 그들이 힘을 남용하지 않을 경우에 `good`하다고 한다. 그러지 않을 경우에는 각각 `lazy`, `bad`라고 한다.  
+
+***
+
+## Summarized version of Simperby Protocol
+
+1. We want the node operation to be **simple and lightweight** to realize a truly distributed, decentralized and self-hosted organization.  
+
+2. To be so, the key assumption is that most of the nodes are **rarely online** and the protocol produces new blocks **on-demand**.  
+
+3. To accomplish that, the **consensus round must be very long**.  
+
+4. For every block, members can **vote on or propose an agenda**. Agendas and votes are **propagated to each other by gossip network**.  
+
+5. At the same time, members may also **propagate their arbitrary chats** used for the human communication, which is **ordered by the block proposer**.  
+
+6. If there is a **governance-approved (majority-voted) agenda** on the network, the block proposer should **include it in the block along with the chat log**, and propose to the consensus.  
+
+7. In that the block proposer should be online most of the time (chat coordination and block proposing), this **responsibility should be laid on a few of the validators most of the time**, to ensure the rarely-online assumption.  
+
+8. Also the role of **block proposer has some authorities** (chat coordination and agenda inclusion) that can't be cryptographically verified if misused (typically censorship).  
+
+9. Thus there exists **'few validators' that take over the block proposal most of the time, but can be lazy or commit harmful misuses** of their authorities which aren't really byzantine faults or invalid blocks.  
+
+10. Normally in ordinary blockchains, this isn't a problem because the rounds are short and the block proposer changes regularly. And as explained, we're not.  
+
+11. Therefore, we need a special mechanism to **'veto' the block proposer not to waste long rounds in the consensus layer**. Thus we introduce a special variation of Tendermint called *Vetomint*.  
+
+12. In Vetomint, validators may veto the current block proposer, but still, the round will progress without timeout expiration (changing the block proposer) if all the honest validators either vote or veto.  
+
+1)
