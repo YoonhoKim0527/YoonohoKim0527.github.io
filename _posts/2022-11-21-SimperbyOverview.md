@@ -38,7 +38,11 @@ a mechanism to communicate with each other in a decentralized, verifiable, and f
 ```
 *한국어 해석*  
 
-즉, Governance에서 단체의 의사 결정을 진행하고 이는 finalized되기 바로 전까지 진행한다. 그 후 Consensus에서 organization의 state를 finalize시킨다. 이 때 Consensus는 asynchronous network상에서 byzantine fault(악의적으로 공격을 하는 것)에 대하여 저항성이 존재한다. 마지막으로 communication channel에서는 탈중앙화되어 있고, 검증 가능하며, 장애 허용성이 있는 방식으로 서로 communicate하는 mechanism을 제공한다. 
+즉, Governance에서 단체의 의사 결정을 진행하고 이는 finalized되기 바로 전까지 진행한다.  
+그 후 Consensus에서 organization의 state를 finalize시킨다. 
+이 때 Consensus는 asynchronous network상에서 byzantine fault(악의적으로 공격을 하는 것)에 대하여 저항성이 존재한다.  
+마지막으로 communication channel에서는 탈중앙화되어 있고, 검증 가능하며, 장애 허용성이 있는 방식으로  
+서로 communicate하는 mechanism을 제공한다. 
 ```
 
 ***
@@ -67,14 +71,17 @@ link of concepts of blockchain : "url", //TODO
 ```
 *한국어 해석*  
 
-1)Simperby는 blockchain의 instance를 build하는 하나의 engine으로써, 이로부터 만들어진 blockchain은 `Simperby Chain`이라고 부른다.   
+1)Simperby는 blockchain의 instance를 build하는 하나의 engine으로써,  
+이로부터 만들어진 blockchain은 `Simperby Chain`이라고 부른다.   
 
 2)하나의 단위 상태 변화는 `Transaction`이라고 부른다.  
 
 3)이 `Transaction`들의 나열을 `agenda`라고 한다. 
 이 때 Governance의 투표는 target block height와 agenda에서 진행된다.   
 
-4)하나의 `block`은 block header와 하나의 agenda를 포함한다. Agenda를 포함하지 않는 block은 허용되지 않는다. 그리고 block은 추가적으로 `extra-agenda-transaction`을 포함할 수 있으며 이는 block 제안자가 추가할 수 있다. 또한 이는 3가지의 type으로 제한이 된다.   
+4)하나의 `block`은 block header와 하나의 agenda를 포함한다. Agenda를 포함하지 않는 block은 허용되지 않는다.  
+그리고 block은 추가적으로 `extra-agenda-transaction`을 포함할 수 있으며 이는 block 제안자가 추가할 수 있다.  
+또한 이는 3가지의 type으로 제한이 된다.   
 
 5)Governance의 participants들은 `members`라고 부른다.   
 
@@ -82,11 +89,13 @@ link of concepts of blockchain : "url", //TODO
 
 7)한 round의 `consensus leader`는 `block proposer`라고도 불리며 이 사람은 그 round에서 block을 제안하는 validator이다.  
 
-8)`round`라고 하는 것은 consensus leader가 block을 제안하는 기간을 정해주며, 이 시기에 consensus vote들이 이루어진다. consensus vote는 pre-vote, pre-commit이 진행되며 이에 대한 자세한 정보는 tendermint 항목에서 다룰 것이다.   
+8)`round`라고 하는 것은 consensus leader가 block을 제안하는 기간을 정해주며, 이 시기에 consensus vote들이 이루어진다.  
+consensus vote는 pre-vote, pre-commit이 진행되며 이에 대한 자세한 정보는 tendermint 항목에서 다룰 것이다.   
 
 9)Validator들은 consensus protocol을 따른다면 정직하거나 비잔틴이 아니어야 할 것이다.   
 
-10)Block을 propose 하는 block proposer or consensus leader는 책임감을 모두 가지고 행동할 시에 `faithful`하다고 하며 그들이 힘을 남용하지 않을 경우에 `good`하다고 한다. 그러지 않을 경우에는 각각 `lazy`, `bad`라고 한다.  
+10)Block을 propose 하는 block proposer or consensus leader는 책임감을 모두 가지고 행동할 시에 `faithful`하다고  
+하며 그들이 힘을 남용하지 않을 경우에 `good`하다고 한다. 그러지 않을 경우에는 각각 `lazy`, `bad`라고 한다.  
 ```
 
 ***
@@ -120,29 +129,40 @@ link of concepts of blockchain : "url", //TODO
 ```
 *한국어 해석*  
 
-1)우리는 node의 연산이 `simple and lightweight` 즉, 간단하고 가볍길 원한다. 이를 통하여 진정으로 분산되고 탈중앙화되어 있으며 self hosted가 가능한 조직을 만들 수 있다.  
+1)우리는 node의 연산이 `simple and lightweight` 즉, 간단하고 가볍길 원한다. 이를 통하여 진정으로 분산되고 탈중앙화되어  
+있으며 self hosted가 가능한 조직을 만들 수 있다.  
 
-2)그렇기 때문에 우리의 중요한 가정은 대부분의 node들이 **rarely online**일 것이라는 것이다. 즉, 대부분이 온라인이지 않고 protocol producer들은 요구가 있을 경우에만 새로운 block을 만들게 된다.  
+2)그렇기 때문에 우리의 중요한 가정은 대부분의 node들이 **rarely online**일 것이라는 것이다. 즉, 대부분이 온라인이지 않고  
+protocol producer들은 요구가 있을 경우에만 새로운 block을 만들게 된다.  
 
 3)이렇기에 한 consensus round는 당연히 매우 길어야 한다.  
 
-4)매 블록마다 member들은 투표를 하거나 안건을 제안할 수 있다. 안건과 투표 결과는 서로에게 gossip network로 전달이 된다. gossip network는 전염병이 퍼지는 방식을 기반으로 한 컴퓨터의 P2P 통신 절차이다.  
+4)매 블록마다 member들은 투표를 하거나 안건을 제안할 수 있다. 안건과 투표 결과는 서로에게 gossip network로 전달이 된다.  
+gossip network는 전염병이 퍼지는 방식을 기반으로 한 컴퓨터의 P2P 통신 절차이다.  
 
 5)동시에, 멤버들은 자신들의 무작위 채팅을 전파할 수 있으며, 이는 block proposer에 의하여 order되게 된다.  
 
-6)만약 네트워크에서 governance에서 승인한 안건이 존재하면 block proposer는 이를 chat log와 함께 block에 포함시켜야 한다. 이 때 block proposer는 일을 수행하는 사람이지 가치판단을 하는 사람이 아니기 때문에 어떤 안건을 포함시킬지 스스로 결정하면 안된다.  
+6)만약 네트워크에서 governance에서 승인한 안건이 존재하면 block proposer는 이를 chat log와 함께 block에 포함시켜야 한다.  
+이 때 block proposer는 일을 수행하는 사람이지 가치판단을 하는 사람이 아니기 때문에 어떤 안건을 포함시킬지 스스로 결정하면 안된다.  
 
-7)Block proposer는 chat coordination과 block proposing을 해야 하므로 거의 모든 시간에 online이어야 한다. 우리가 대부분의 node들이 온라인일 확률이 적다는 가정을 보증하기 위해서 이 책임감을 적은 validator들에게 전가한다.  
+7)Block proposer는 chat coordination과 block proposing을 해야 하므로 거의 모든 시간에 online이어야 한다.  
+우리가 대부분의 node들이 온라인일 확률이 적다는 가정을 보증하기 위해서 이 책임감을 적은 validator들에게 전가한다.  
 
-8)Block proposer는 chat coordination(채팅 조정)과 안건 포함 등의 권한이 있으며 이를 proposer가 악용한다고 하더라도 암호학적으로 확인이 불가능해진다. 형식적으로 검열이 가능은 하다는 것이다.  
+8)Block proposer는 chat coordination(채팅 조정)과 안건 포함 등의 권한이 있으며 이를 proposer가 악용한다고 하더라도  
+암호학적으로 확인이 불가능해진다. 형식적으로 검열이 가능은 하다는 것이다.  
 
-9)결국엔 적은 validator들이 존재하여서 그들이 대부분의 시간동안 block proposal을 책임지고 진행한다. 하지만 그들 또한 lazy하거나 harmful misusesFMF commi할 수 있다. 이는 Byzantine fault나 invalid block이 아닌 권한에 대해서만 가능하다.  
+9)결국엔 적은 validator들이 존재하여서 그들이 대부분의 시간동안 block proposal을 책임지고 진행한다. 하지만 그들 또한  
+lazy하거나 harmful misusesFMF commi할 수 있다. 이는 Byzantine fault나 invalid block이 아닌 권한에 대해서만 가능하다.  
 
-10)일반적으로 blockchain에서는 이를 문제로 삼지 않는다. 그들의 round는 매우 짧고 block proposer가 주기적으로 바뀌기 때문이다. 하지만 simperby에서는 그렇지 않다.  
+10)일반적으로 blockchain에서는 이를 문제로 삼지 않는다. 그들의 round는 매우 짧고 block proposer가 주기적으로 바뀌기 때문이다.  
+하지만 simperby에서는 그렇지 않다.  
 
-11)따라서 우리는 veto(거부권)이라는 특별한 매커니즘을 사용한다. 우리는 긴 round를 consensus layer에서 낭비하지 않는다. 이를 우리는 tendermint의 변형인 vetomint라고 하겠다.  
+11)따라서 우리는 veto(거부권)이라는 특별한 매커니즘을 사용한다. 우리는 긴 round를 consensus layer에서 낭비하지 않는다.  
+이를 우리는 tendermint의 변형인 vetomint라고 하겠다.  
 
-12)Vetomint에서 검증하는 사람(validator)들은 현재 Block proposer에 대하여 거부권을 행사할 수 있으며 round는 제한시간 만료가 없이 진행이 된다. 이는 block proposer를 바꿈으로써 진행이 된다. 위 과정은 정직한 validator들이 투표를 하거나 거부권을 행사할 때 이루어진다.
+12)Vetomint에서 검증하는 사람(validator)들은 현재 Block proposer에 대하여 거부권을 행사할 수 있으며 round는 제한시간  
+만료가 없이 진행이 된다. 이는 block proposer를 바꿈으로써 진행이 된다. 위 과정은 정직한 validator들이 투표를 하거나 거부권을  
+행사할 때 이루어진다.
 ```
 
 ***
@@ -153,7 +173,9 @@ Simperby strongly encourages each member to run their node,
 to ensure that the network is decentralized and distributed (and so truly self-hosted). In other words, running a Simperby chain is not about using AWS servers by a few people but using their laptops to physically run the chain. To achieve that, it is important to **keep the node operation as simple and lightweight as possible**.  
 
 ```
-Simperby에서는 각각의 멤버가 그들의 node를 돌릴 것을 강하게 추천한다. 이는 탈중앙화와 분산된 network를 보증하기 위해서이다. 즉, simperby에서는 AWS 서버를 이용하지 않고 그들 각각의 laptop으로 chain을 돌리게 된다. 따라서 하나의 node operation을 최대한 간단하고 가볍게 만드는 것이 중요하다. 
+Simperby에서는 각각의 멤버가 그들의 node를 돌릴 것을 강하게 추천한다. 이는 탈중앙화와 분산된 network를 보증하기 위해서이다.  
+즉, simperby에서는 AWS 서버를 이용하지 않고 그들 각각의 laptop으로 chain을 돌리게 된다. 따라서 하나의 node operation을  
+최대한 간단하고 가볍게 만드는 것이 중요하다. 
 ```
 
 We will firstly move on to "Rarely-online nodes".  
@@ -171,7 +193,10 @@ Since Simperby's BFT consensus assumes a partially-synchronous network, rarely-o
 Condition 1 turns out to be a tough challenge in the later sections, so keep it in mind.  
 
 ```
-간단하고 가벼운 node operation을 만들 때 가장 중요한 것중 하나는 node가 얼마나 자주 online이어야 하냐는 것이다. 만약 우리가 validator들이 그들의 laptop으로 node를 돌리게 하고 싶다면 현실적으로 그들이 계속 online이라고 가정하기 힘들다. Simperby의 BFT consensus는 **partially-synchronous network**를 가정하기 때문에 rarely online node들은 당연히 handle이 가능하다. 왜냐면 그들은 다음 두 가정을 따를 시에 그저 asynchrony의 특수 케이스중 하나이기 때문이다.  
+간단하고 가벼운 node operation을 만들 때 가장 중요한 것중 하나는 node가 얼마나 자주 online이어야 하냐는 것이다.  
+만약 우리가 validator들이 그들의 laptop으로 node를 돌리게 하고 싶다면 현실적으로 그들이 계속 online이라고 가정하기 힘들다.  
+Simperby의 BFT consensus는 **partially-synchronous network**를 가정하기 때문에 rarely online node들은 당연히  
+handle이 가능하다. 왜냐면 그들은 다음 두 가정을 따를 시에 그저 asynchrony의 특수 케이스중 하나이기 때문이다.  
 
 1)충분하게 round가 길어서 rarely online인 모든 node들의 출현이 가능해질 때까지 cover할 수 있어야 한다.  
 
@@ -194,9 +219,15 @@ Every governance agenda must be approved by a majority vote of the members so it
 Considering that, naturally, Simperby's performance is bound by the governance process, not the consensus which is slowed by lightweight node operation.
 
 ```
-rarely online이라는 것은 즉, 자주 진행되지 않는 블록체인이라는 뜻이다. BFT algorithm에서는 2/3 이상의 node들이 consensus 과정에서 협력을 해야 block을 만들 수 있다. 이렇게 처리하는 것은 블록체인의 대기 시간이나 처리량에 안좋은 영향을 미칠 수 있지만 simperby는 공개적으로 사용자에게 서비스를 제공하는 플랫폼이 아니라 권한이 있는 구성원들을 위한 governance 플랫폼이기 때문에 큰 문제가 되지 않는다.  
+rarely online이라는 것은 즉, 자주 진행되지 않는 블록체인이라는 뜻이다. BFT algorithm에서는 2/3 이상의 node들이 consensus  
+과정에서 협력을 해야 block을 만들 수 있다. 이렇게 처리하는 것은 블록체인의 대기 시간이나 처리량에 안좋은 영향을 미칠 수 있지만  
+simperby는 공개적으로 사용자에게 서비스를 제공하는 플랫폼이 아니라 권한이 있는 구성원들을 위한 governance 플랫폼이기 때문에  
+큰 문제가 되지 않는다.  
 
-Simperby blockchain은 governance에서 승인한 상태 변화만을 포함한다. 이 때 consensus leader에 의한 것들은 예외로 처리한다. 모든 거버넌스의 안건들은 멤버들의 투표를 통하여 승인을 받아야 한다. 이것이 몇 일 혹은 몇 주가 걸릴 수도 있다. 따라서 자연스럽게 simperby의 performance는 가벼운 node operation에 의하여 slow down된 consensus에 의하여 결정되지 않고 governance의 진행에 Bound 되어 있게 된다.  
+Simperby blockchain은 governance에서 승인한 상태 변화만을 포함한다. 이 때 consensus leader에 의한 것들은 예외로 처리한다.  
+모든 거버넌스의 안건들은 멤버들의 투표를 통하여 승인을 받아야 한다. 이것이 몇 일 혹은 몇 주가 걸릴 수도 있다. 따라서 자연스럽게  
+simperby의 performance는 가벼운 node operation에 의하여 slow down된 consensus에 의하여 결정되지 않고 governance의  
+진행에 Bound 되어 있게 된다.  
 ```
 
 ### MultiChain DAO
