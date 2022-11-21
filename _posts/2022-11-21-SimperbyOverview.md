@@ -1,12 +1,14 @@
 ---
 title:  "About PDAO(Postech DAO)'s Simperby"
 excerpt: "I will talk about PDAO's simperby protocol preview with both Eng/Kor"
+published: true
 
 #categories:
 #- PDAO
 #tags:
 #- [PDAO, Simperby, rust]
 
+layout: single
 toc: true
 toc_sticky: true
  
