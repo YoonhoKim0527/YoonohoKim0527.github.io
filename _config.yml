@@ -106,9 +106,9 @@ analytics:
 author:
   name             : "Yoonho Kim"
   avatar           : "/assets/images/KakaoTalk_Photo_2022-11-13-21-46-08.jpeg"
-  bio              : "I am an **amazing** person."
+  bio              : "Start something that you can do"
   location         : "Somewhere"
-  email            :
+  email            : "hjyang093@gmail.com"
   links:
     - label: "Email"
       icon: "fas fa-fw fa-envelope-square"
@@ -124,7 +124,7 @@ author:
       # url: "https://facebook.com/"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      # url: "https://github.com/"
+      url: "https://github.com/YoonhoKim0527"
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
       # url: "https://instagram.com/"
