@@ -4,8 +4,8 @@ excerpt: "I will talk about PDAO's simperby protocol preview with both Eng/Kor"
 
 #categories:
 #- PDAO
-tags:
-  - [PDAO, Simperby, rust]
+#tags:
+#- [PDAO, Simperby, rust]
 
 toc: true
 toc_sticky: true
