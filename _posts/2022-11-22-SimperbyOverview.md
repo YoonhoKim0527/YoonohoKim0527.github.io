@@ -3,7 +3,7 @@ title:  "About PDAO(Postech DAO)'s Simperby"
 excerpt: "I will talk about PDAO's simperby protocol preview with both Eng/Kor"
 
 categories:
-  - PDAO
+#- PDAO
 tags:
   - [PDAO, Simperby, rust]
 
