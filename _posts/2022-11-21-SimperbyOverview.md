@@ -395,4 +395,37 @@ These three transactions are the only exceptions that are not part of the agenda
 2. ReportMisBehavior  
 중복 투표를 컨센서스에서 진행하거나 채팅 finalization에 대하여 리더가 실수를 한 경우에 기록되며, 이는 실수를 한 validator에 대하여 voting power slashing이 자동으로 일어나게 해준다.  
 3. Delegate/Undelegate  
-이는 어떤 사람에 대하여 voting power를 위임하거나 위임취소를 시키는 것으로, 그 사람에 대한 서명이 필요하다.  
+이는 어떤 사람에 대하여 voting power를 위임하거나 위임취소를 시키는 것으로, 위임 해제를 시키는 사람의 서명이 필요하다.  
+
+위의 세 가지가 안건에 포함되지 않는 유일한 것들으로, 이들은 제안자에 의하여 곧바로 포함된다.  
+```
+
+***
+
+### Responsibiliy
+
+The leader should be **responsible**.
+
+- The leader should be online for the whole round, providing enough frequency of chat chain semifinalizations.
+- The leader should propose a block as soon as possible if there is any eligible agenda.
+- The leader should report misbehaviors as well.
+
+Again, one of the key requirements of Simperby is making the node operation as lightweight as possible, especially in terms of how many times and how long the node should be online. Thus laying the burden of being a leader on a round robin, which eventually involves all the validators evenly, will just exhaust them.
+
+To mitigate this problem, Simperby supports a **stable leader** feature.
+
+- The leader order is determined in the state.
+- The leader order doesn't change throughout the heights if the order specified in the state stays the same.
+(*i.e.*, the leader for the first round stays the same)
+- For a single height, it is also possible to repeat the first few leaders for several rounds. (*e.g.*, `1->1->1->2->2->3->4->...` instead of `1->2->3->4->...`)
+
+Another advantage of a stable leader is that it is **predictable**. Every validator can be quite sure how often they should turn on their node based on the order in the stable leader list.
+
+As long as the selected first few leaders are honest(not byzantine), and *faithful* (fulfilling their responsibilities), the network will keep on **live**.
+
+```
+리더는 책임감이 있어야 한다.
+- 리더는 전체 라운드에 대하여 online이어야 하고, 충분한 chat chain semifinalization을 제공하여야 한다. 
+- 리더는 어떠한 자격이 있는 안건이 들어왔을 때 block을 최대한 빠르게 제안하여야 한다.  
+- 리더는 misbehavior들을 보고해야 한다. 
+```
