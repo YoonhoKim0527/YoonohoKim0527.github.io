@@ -410,6 +410,10 @@ validator에 대하여 voting power slashing이 자동으로 일어나게 해준
 
 ***
 
+## Consensus Leader
+
+You might notice that the role of the consensus leader is very important in the Simperby governance.
+
 ### Responsibiliy
 
 The leader should be **responsible**.
@@ -435,5 +439,18 @@ As long as the selected first few leaders are honest(not byzantine), and *faithf
 리더는 책임감이 있어야 한다.
 - 리더는 전체 라운드에 대하여 online이어야 하고, 충분한 chat chain semifinalization을 제공하여야 한다. 
 - 리더는 어떠한 자격이 있는 안건이 들어왔을 때 block을 최대한 빠르게 제안하여야 한다.  
-- 리더는 misbehavior들을 보고해야 한다. 
+- 리더는 misbehavior들을 보고해야 한다.  
+
+다시 말하지만, Simperby의 중요한 요구사항중 하나는 node operation이 최대한 가볍게 이루어지도록 하는 것이다.  
+그중에서도 얼마나 많이, 그리고 얼마나 많은 시간동안 node가 online이어야 하는지가 중요하다.  
+따라서 원형으로 leader를 계속 돌리면서 책임을 돌리면 결국에는 validator들이 모두 한 번씩 진행하게 되고 
+이것은 그들을 지치게 할 것이다. 이를 해결하기 위해서 Simperby는 **Stable Leader** 라는 특성을 사용한다.  
+
+- 리더의 순서는 state에서 결정되어 있다.  
+- 리더의 순서는 높이가 바뀐다 하더라도 그대로 남아있으며 state에서 순서가 바뀌지 않는다면 바뀌지 않는다.  
+- 하나의 높이에서, 첫 적은 리더들은 리더를 반복할 수 있다. (1->1->2->2 ...)  
+
+stable leader의 다른 장점은 예측 가능하다는 것이다. 모든 validator들은 자기가 언제쯤 node를 켜야하는지 예측  
+이 가능해진다.  
+첫 적은 리더들이 비잔틴이 아니고 정직하고 책임감을 모두 채운다면 네트워크는 계속 살아 있을 것이다.  
 ```
