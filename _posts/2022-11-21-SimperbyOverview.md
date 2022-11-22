@@ -232,3 +232,105 @@ simperby의 performance는 가벼운 node operation에 의하여 slow down된 co
 
 ### MultiChain DAO
 
+One of the notable use cases of Simperby is that it can establish a **multi-chain DAO**. (See [this](./multichain_dao.md) for more details) . 
+It's super-easy to expand the organization to other existing chains (so-called 'colony chains') using
+the light client of the Simperby consensus.  
+Since the light client is uploaded as a contract to other chains,
+any block progress of the Simperby consensus will require an additional
+transaction to update and store the Merkle root of it.  
+This might not be cheap, because **the organization will have to pay for the gas cost for every colony chain, for every Simperby block**.  
+That is another reason that on-demand block production is considered reasonable.  
+
+```
+Simperby는  multi-chain DAO이다. 이 때 multichain이란 다른 chain끼리 상호작용을 하는 것을 말한다. 그리고 Multichain DAO의 경우에는 여러 체인에 걸쳐서 DAO가   
+작용한다는 것이다. 보통의 DAO의 경우는 단일 체인 위의 contract로 올라간다. Organization을 다른 존재하고 있던 chain으로 확장하는 것은 매우 쉽다. 이를 colony   chain이라고 부르며, 이는 Simperby consensus의 light client에 의하여 작용한다. Light client는 다른 chain의 contract로 올라가기에 Simperby Consensus의   
+아무 블록 진행은 추가적인 transaction update가 필요하고 이에 따라서 Merkle root를 저장하게 한다. 이는 싸지만은 않은데, 그 이유는 조직이 모든 colony chain에 대하여  
+비용을 지불해야하고, 이는 모든 Simperby block에 대해서 이루어져야 하기 때문이다.  
+```
+
+***
+
+## Governance
+
+Simperby's governance is implemented by P2P voting.
+- Any member can propose an agenda, and it will be propagated over the P2P network.
+- Any member also can cast a vote on the agenda if they prefer it. The vote will be propagated as well.
+- Any agenda that has over 50% votes is **eligible** to be included in a block.
+- A block can be **valid only if it includes an eligible agenda**. In other words, empty blocks are not allowed.
+- To decide which eligible agenda to finalize is the role of consensus, not the governance.
+- The consensus is a BFT algorithm based on a leader-and-round style.
+
+```
+먼저 Simperby의 Governance는 P2P voting에 의하여 구현된다. 이 때 P2P(Peer to Peer) network란 비교적 소수의 서버에 집중하기보단 망구성에 참여하는 기계들의 계산과 대역폭 성능에 의존하여 구성되는 통신망이다. P2P 통신망은 일반적으로 노드들을 규모가 큰 애드혹으로 서로 연결하는 경우에 이용된다. 이에 대한 posting을 tag하겠다.
+[about P2P network](https://post.naver.com/viewer/postView.nhn?volumeNo=14678102&memberNo=19185109).  
+
+이 때 특성은 다음과 같다.  
+- 모든 member는 안건을 제시할 수 있다. 그리고 이것은 P2P network에 의하여 전파된다.  
+- 아무나 member이기만 하면 마음에 들 경우에 그 안건에 대하여 vote를 할 수 있다. 그 투표도 마찬가지로 전파가 될 것이다.  
+- block에 들어갈 자격이 있는 vote는 50%이상의 vote를 받은 안건이다.  
+- block은 자격이 있는 안건을 포함할 경우에만 valid하다. 즉, 빈 block은 불가능하다는 것이다.  
+- governance에서는 어떤 자격이 있는 안건을 finalize하는 역할은 하지 않는다. 이는 consensus의 역할이다.  
+- Consensus는 leader-and-round style의 BFT 알고리즘에 기반한다.  
+```
+
+***
+
+### What can be an agenda?
+
+- Transaction is only the unit of a **state transition**, not an individual item signed and broadcasted as in the case of a conventional blockchain.
+- An 'agenda' is defined as `(Proposer, Height, [Transaction(s)])`.
+- Only a **single agenda** can be included in a block. This is for preventing complicated dependency problems.
+  - If multiple agendas are allowed, each agenda must be independent; Otherwise, voters can't be sure how each agenda is ordered, or even whether it is included in the finalized block. This will cause a severe restriction of the possible agenda items.
+- Because `Height` is a part of an agenda,
+  every agenda and its vote will be outdated and thus discarded if the block height progresses though it may be re-proposed and re-voted.
+  
+  ```
+  - 먼저 transaction은 상태 변화의 단위일 뿐이고, conventional - - blockchain에서 이는 사인되고 broadcast되는 독립적인 item이 아니다.  
+  - 안건은 `(제안자, 블록 높이, [transaction(s)])`으로 정의된다.  
+  - 오직 하나의 안건만이 block에 포함되어야 하며, 이로써 복잡한 dependency problem을 해결한다.  
+  - 만약 여러 개의 안건들이 허용이 된다면 이들 각각이 독립적이어야 한다. 반면에, 투표자들은 각 안건이 어떻게 order되어 있는지 확신할 수 없고, 그것들이 finalized block에 포함되는지도 알 수 없다. 이로써 가능한 agenda item에 심각한 규제를 발생시키게 된다.  
+  - 또한 agenda에 높이가 적혀 있기 때문에 체인의 높이가 변경될 시에 그 agenda는 무효화된다.  
+  ```
+
+*** 
+
+## Chatting
+
+Again, Simperby is a blockchain engine that runs a **standalone, sovereign, and self-hosted** organization.
+Thus, the communication channel for the organization should be so as well.
+The only way to implement such channel (instead of Discord) would be to leverage the existing P2P network.  
+
+- Any member can broadcast its message, signed by their public key.  
+
+- Each message contains a list of hashes of every previous messages that the signer has perceived, **forming a chain**.  
+
+- Like PoW, the longest chat chain is considered a candidate for the canonical one.  
+
+- The consensus leader (block proposer) for the round plays a special role.  
+
+- the leader can broadcast a chat as well, but such chat is considered a **semifinalized point**.  
+
+- A *faithful* leader would **frequently** insert its `ack` chat **on the (seemingly) longest chain**.  
+
+- A *good* leader must not commit a fork (semifinalizing two conflicting chains) . 
+
+- On top of the recent leader-semifinalized chat, other members continue chatting using the longest-chain rule until the next finalization point.  
+
+- Once the governance reaches an eligible agenda, the leader must semifinalize the chat chain for the last time, and include it in the block. If the block is finalized by the consensus then the chat log for the block is finalized as well.
+
+- A *good* leader must include the last-semifinalized chat chain which is the one that the other members would consider the canonical one.
+
+```
+먼저, Simperby는 다시 말하지만 **Standalone, Sovereign, and self-hosted** 되어 있는 조직이다. 그래서, 조직의 대화 채널 또한 그래야 한다. 이런 채널을 구현하는 Discord를 제외한 유일한 방법은 이미 존재하는 P2P network를 레버리지하는 것이다. 여기서 레버리지의 원래 뜻은 남의 자본을 가지고 자기 자본의 이익률을 높이는 것이다.  
+
+- 아무 멤버는 메세지를 broadcast할 수 있으며 그것들은 그들의 public key로 사인되어 있다.  
+- 모든 메시지에는 signer가 받은 전 메시지의 hash list들이 포함되어 있다. 그들이 결국에 chain을 형성하게 된다.  
+- PoW와 같이 longest chat chain이 canonical chain의 후보로 고려된다.  
+- 그 round에 대한 컨센서스 리더가 특별한 역할을 한다.  
+- 리더도 Chat을 broadcast할 수 있지만 그들은 `semifinalized point`로 고려된다.  
+- 충실한 리더는 `act` chat을 가장 길어보이는 chain에 자주 삽입할 것이다.  
+- 좋은 리더는 fork를 commit하면 안된다. 충돌하는 두 chain을 semifinalize하면 안된다는 의미이다.  
+- 가장 최근의 leader-semifinalized된 chat이후에 다른 멤버들은 다음 finalized point까지 가장 긴 체인 법칙을 따라서 채팅을 이어 나간다.  
+- 한번 거버넌스가 자격이 있는 안건에 도달하게 되면 리더는 무조건 chat chain을 semifinalize시켜야 하고, 이를 block안에 포함시켜야 한다. 만약 block이 consensus에 의하여 finalized되면 그에 따라 채팅 log도 마찬가지로 finalized되게 된다.  
+- 좋은 리더는 last-semifainalized chat chain을 포함시켜야 하고, 그것은 다른 멤버들이 canonical한 것으로 고려하던 것이어야 한다.  
+```
