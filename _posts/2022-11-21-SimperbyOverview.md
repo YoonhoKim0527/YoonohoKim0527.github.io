@@ -293,8 +293,8 @@ Simperby's governance is implemented by P2P voting.
 item이 아니다.  
 - 안건은 `(제안자, 블록 높이, [transaction(s)])`으로 정의된다.  
 - 오직 하나의 안건만이 block에 포함되어야 하며, 이로써 복잡한 dependency problem을 해결한다.  
-- 만약 여러 개의 안건들이 허용이 된다면 이들 각각이 독립적이어야 한다. 반면에, 투표자들은 각 안건이 어떻게 order되어 있는지 확신할 수  
-없고, 그것들이 finalized block에 포함되는지도 알 수 없다. 이로써 가능한 agenda item에 심각한 규제를 발생시키게 된다.  
+- 만약 여러 개의 안건들이 허용이 된다면 이들 각각이 독립적이어야 한다. 반면에, 투표자들은 각 안건이 어떻게 order되어 있는지 확신할 
+수 없고, 그것들이 finalized block에 포함되는지도 알 수 없다. 이로써 가능한 agenda item에 심각한 규제를 발생시키게 된다.  
 - 또한 agenda에 높이가 적혀 있기 때문에 체인의 높이가 변경될 시에 그 agenda는 무효화된다.  
 ```
 
