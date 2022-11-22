@@ -219,14 +219,14 @@ Every governance agenda must be approved by a majority vote of the members so it
 Considering that, naturally, Simperby's performance is bound by the governance process, not the consensus which is slowed by lightweight node operation.
 
 ```
-rarely online이라는 것은 즉, 자주 진행되지 않는 블록체인이라는 뜻이다. BFT algorithm에서는 2/3 이상의 node들이 consensus  
-과정에서 협력을 해야 block을 만들 수 있다. 이렇게 처리하는 것은 블록체인의 대기 시간이나 처리량에 안좋은 영향을 미칠 수 있지만  
-simperby는 공개적으로 사용자에게 서비스를 제공하는 플랫폼이 아니라 권한이 있는 구성원들을 위한 governance 플랫폼이기 때문에  
+rarely online이라는 것은 즉, 자주 진행되지 않는 블록체인이라는 뜻이다. BFT algorithm에서는 2/3 이상의 node들이 consensus    
+과정에서 협력을 해야 block을 만들 수 있다. 이렇게 처리하는 것은 블록체인의 대기 시간이나 처리량에 안좋은 영향을 미칠 수 있지만    
+simperby는 공개적으로 사용자에게 서비스를 제공하는 플랫폼이 아니라 권한이 있는 구성원들을 위한 governance 플랫폼이기 때문에    
 큰 문제가 되지 않는다.  
 
-Simperby blockchain은 governance에서 승인한 상태 변화만을 포함한다. 이 때 consensus leader에 의한 것들은 예외로 처리한다.  
-모든 거버넌스의 안건들은 멤버들의 투표를 통하여 승인을 받아야 한다. 이것이 몇 일 혹은 몇 주가 걸릴 수도 있다. 따라서 자연스럽게  
-simperby의 performance는 가벼운 node operation에 의하여 slow down된 consensus에 의하여 결정되지 않고 governance의  
+Simperby blockchain은 governance에서 승인한 상태 변화만을 포함한다. 이 때 consensus leader에 의한 것들은 예외로 처리한다.    
+모든 거버넌스의 안건들은 멤버들의 투표를 통하여 승인을 받아야 한다. 이것이 몇 일 혹은 몇 주가 걸릴 수도 있다. 따라서 자연스럽게    
+simperby의 performance는 가벼운 node operation에 의하여 slow down된 consensus에 의하여 결정되지 않고 governance의    
 진행에 Bound 되어 있게 된다.  
 ```
 
@@ -242,10 +242,8 @@ This might not be cheap, because **the organization will have to pay for the gas
 That is another reason that on-demand block production is considered reasonable.  
 
 ```
-Simperby는  multi-chain DAO이다. 이 때 multichain이란 다른 chain끼리 상호작용을 하는 것을 말한다. 그리고 Multichain DAO의 경우에는 여러 체인에 걸쳐서 DAO가   
-작용한다는 것이다. 보통의 DAO의 경우는 단일 체인 위의 contract로 올라간다. Organization을 다른 존재하고 있던 chain으로 확장하는 것은 매우 쉽다. 이를 colony   chain이라고 부르며, 이는 Simperby consensus의 light client에 의하여 작용한다. Light client는 다른 chain의 contract로 올라가기에 Simperby Consensus의   
-아무 블록 진행은 추가적인 transaction update가 필요하고 이에 따라서 Merkle root를 저장하게 한다. 이는 싸지만은 않은데, 그 이유는 조직이 모든 colony chain에 대하여  
-비용을 지불해야하고, 이는 모든 Simperby block에 대해서 이루어져야 하기 때문이다.  
+Simperby는  multi-chain DAO이다. 이 때 multichain이란 다른 chain끼리 상호작용을 하는 것을 말한다. 그리고 Multichain DAO의  경우에는 여러 체인에 걸쳐서 DAO가 작용한다는 것이다. 보통의 DAO의 경우는 단일 체인 위의 contract로 올라간다. Organization을 다른  
+존재하고 있던 chain으로 확장하는 것은 매우 쉽다. 이를 colony   chain이라고 부르며, 이는 Simperby consensus의 light client에  의하여 작용한다. Light client는 다른 chain의 contract로 올라가기에 Simperby Consensus의 아무 블록 진행은 추가적인 transaction   update가 필요하고 이에 따라서 Merkle root를 저장하게 한다. 이는 싸지만은 않은데, 그 이유는 조직이 모든 colony chain에 대하여 비용을  지불해야하고, 이는 모든 Simperby block에 대해서 이루어져야 하기 때문이다.   
 ```
 
 ***
@@ -261,7 +259,8 @@ Simperby's governance is implemented by P2P voting.
 - The consensus is a BFT algorithm based on a leader-and-round style.
 
 ```
-먼저 Simperby의 Governance는 P2P voting에 의하여 구현된다. 이 때 P2P(Peer to Peer) network란 비교적 소수의 서버에 집중하기보단 망구성에 참여하는 기계들의 계산과 대역폭 성능에 의존하여 구성되는 통신망이다. P2P 통신망은 일반적으로 노드들을 규모가 큰 애드혹으로 서로 연결하는 경우에 이용된다. 이에 대한 posting을 tag하겠다.
+먼저 Simperby의 Governance는 P2P voting에 의하여 구현된다. 이 때 P2P(Peer to Peer) network란 비교적 소수의 서버에 집중하기보단   망구성에 참여하는 기계들의 계산과 대역폭 성능에 의존하여 구성되는 통신망이다. P2P 통신망은 일반적으로 노드들을 규모가 큰 애드혹으로 서로 연결하는  
+경우에 이용된다. 이에 대한 posting을 tag하겠다.
 [about P2P network](https://post.naver.com/viewer/postView.nhn?volumeNo=14678102&memberNo=19185109).  
 
 이 때 특성은 다음과 같다.  
@@ -285,10 +284,12 @@ Simperby's governance is implemented by P2P voting.
   every agenda and its vote will be outdated and thus discarded if the block height progresses though it may be re-proposed and re-voted.
   
   ```
-  - 먼저 transaction은 상태 변화의 단위일 뿐이고, conventional - - blockchain에서 이는 사인되고 broadcast되는 독립적인 item이 아니다.  
+  - 먼저 transaction은 상태 변화의 단위일 뿐이고, conventional - - blockchain에서 이는 사인되고 broadcast되는 독립적인  
+  item이 아니다.  
   - 안건은 `(제안자, 블록 높이, [transaction(s)])`으로 정의된다.  
   - 오직 하나의 안건만이 block에 포함되어야 하며, 이로써 복잡한 dependency problem을 해결한다.  
-  - 만약 여러 개의 안건들이 허용이 된다면 이들 각각이 독립적이어야 한다. 반면에, 투표자들은 각 안건이 어떻게 order되어 있는지 확신할 수 없고, 그것들이 finalized block에 포함되는지도 알 수 없다. 이로써 가능한 agenda item에 심각한 규제를 발생시키게 된다.  
+  - 만약 여러 개의 안건들이 허용이 된다면 이들 각각이 독립적이어야 한다. 반면에, 투표자들은 각 안건이 어떻게 order되어 있는지 확신할 수 없고,  
+  그것들이 finalized block에 포함되는지도 알 수 없다. 이로써 가능한 agenda item에 심각한 규제를 발생시키게 된다.  
   - 또한 agenda에 높이가 적혀 있기 때문에 체인의 높이가 변경될 시에 그 agenda는 무효화된다.  
   ```
 
@@ -321,7 +322,9 @@ The only way to implement such channel (instead of Discord) would be to leverage
 - A *good* leader must include the last-semifinalized chat chain which is the one that the other members would consider the canonical one.
 
 ```
-먼저, Simperby는 다시 말하지만 **Standalone, Sovereign, and self-hosted** 되어 있는 조직이다. 그래서, 조직의 대화 채널 또한 그래야 한다. 이런 채널을 구현하는 Discord를 제외한 유일한 방법은 이미 존재하는 P2P network를 레버리지하는 것이다. 여기서 레버리지의 원래 뜻은 남의 자본을 가지고 자기 자본의 이익률을 높이는 것이다.  
+먼저, Simperby는 다시 말하지만 **Standalone, Sovereign, and self-hosted** 되어 있는 조직이다. 그래서, 조직의 대화 채널 또한  
+그래야 한다. 이런 채널을 구현하는 Discord를 제외한 유일한 방법은 이미 존재하는 P2P network를 레버리지하는 것이다. 여기서 레버리지의  
+원래 뜻은 남의 자본을 가지고 자기 자본의 이익률을 높이는 것이다.  
 
 - 아무 멤버는 메세지를 broadcast할 수 있으며 그것들은 그들의 public key로 사인되어 있다.  
 - 모든 메시지에는 signer가 받은 전 메시지의 hash list들이 포함되어 있다. 그들이 결국에 chain을 형성하게 된다.  
