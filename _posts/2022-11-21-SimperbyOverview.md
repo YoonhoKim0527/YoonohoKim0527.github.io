@@ -242,12 +242,12 @@ This might not be cheap, because **the organization will have to pay for the gas
 That is another reason that on-demand block production is considered reasonable.  
 
 ```
-Simperby는  multi-chain DAO이다. 이 때 multichain이란 다른 chain끼리 상호작용을 하는 것을 말한다. 그리고 Multichain DAO 
-의 경우에는 여러 체인에 걸쳐서 DAO가 작용한다는 것이다. 보통의 DAO의 경우는 단일 체인 위의 contract로 올라간다. Organization을 다른    
-존재하고 있던 chain으로 확장하는 것은 매우 쉽다. 이를 colony   chain이라고 부르며, 이는 Simperby consensus의 light client에  
-의하여 작용한다. Light client는 다른 chain의 contract로 올라가기에 Simperby Consensus의 아무 블록 진행은 추가적인 transaction  
-update가 필요하고 이에 따라서 Merkle root를 저장하게 한다. 이는 싸지만은 않은데, 그 이유는 조직이 모든 colony chain에 대하여 비용을 
-지불해야하고, 이는 모든 Simperby block에 대해서 이루어져야 하기 때문이다.    
+Simperby는  multi-chain DAO이다. 이 때 multichain이란 다른 chain끼리 상호작용을 하는 것을 말한다. 그리고 Multichain  
+DAO의 경우에는 여러 체인에 걸쳐서 DAO가 작용한다는 것이다. 보통의 DAO의 경우는 단일 체인 위의 contract로 올라간다.  
+Organization을 다른 존재하고 있던 chain으로 확장하는 것은 매우 쉽다. 이를 colony chain이라고 부르며, 이는 Simperby  
+consensus의 light client에 의하여 작용한다. Light client는 다른 chain의 contract로 올라가기에 Simperby Consensus의  
+아무 블록 진행은 추가적인 transaction update가 필요하고 이에 따라서 Merkle root를 저장하게 한다. 이는 싸지만은 않은데,  
+그 이유는 조직이 모든 colony chain에 대하여 비용을 지불해야하고, 이는 모든 Simperby block에 대해서 이루어져야 하기 때문이다.    
 ```
 
 ***
@@ -288,15 +288,15 @@ Simperby's governance is implemented by P2P voting.
 - Because `Height` is a part of an agenda,
   every agenda and its vote will be outdated and thus discarded if the block height progresses though it may be re-proposed and re-voted.
   
-  ```
-  - 먼저 transaction은 상태 변화의 단위일 뿐이고, conventional - - blockchain에서 이는 사인되고 broadcast되는 독립적인   
-  item이 아니다.  
-  - 안건은 `(제안자, 블록 높이, [transaction(s)])`으로 정의된다.  
-  - 오직 하나의 안건만이 block에 포함되어야 하며, 이로써 복잡한 dependency problem을 해결한다.  
-  - 만약 여러 개의 안건들이 허용이 된다면 이들 각각이 독립적이어야 한다. 반면에, 투표자들은 각 안건이 어떻게 order되어 있는지 확신할 수  
-  없고, 그것들이 finalized block에 포함되는지도 알 수 없다. 이로써 가능한 agenda item에 심각한 규제를 발생시키게 된다.  
-  - 또한 agenda에 높이가 적혀 있기 때문에 체인의 높이가 변경될 시에 그 agenda는 무효화된다.  
-  ```
+```
+- 먼저 transaction은 상태 변화의 단위일 뿐이고, conventional - - blockchain에서 이는 사인되고 broadcast되는 독립적인   
+item이 아니다.  
+- 안건은 `(제안자, 블록 높이, [transaction(s)])`으로 정의된다.  
+- 오직 하나의 안건만이 block에 포함되어야 하며, 이로써 복잡한 dependency problem을 해결한다.  
+- 만약 여러 개의 안건들이 허용이 된다면 이들 각각이 독립적이어야 한다. 반면에, 투표자들은 각 안건이 어떻게 order되어 있는지 확신할 수  
+없고, 그것들이 finalized block에 포함되는지도 알 수 없다. 이로써 가능한 agenda item에 심각한 규제를 발생시키게 된다.  
+- 또한 agenda에 높이가 적혀 있기 때문에 체인의 높이가 변경될 시에 그 agenda는 무효화된다.  
+```
 
 *** 
 
@@ -359,3 +359,15 @@ The reason that the leader only 'semifinalizes' the chat chain, instead of runni
 Note that if there is a malicious member who tries to spam the chat, the leader will not finalize the spam chain, and the other members would recognize such censorship as something `not bad`.
 
 ```
+리더가 그저 chain을 `semifinalize`하기만 하고 채팅 서버를 운영하지 않는 이유는 그것이 더 검열에 저항성이 있기 때문이다. 
+
+- full chat server에 비교하여서 가장 긴 chain에 기반한 프로토콜은 total chat ordering에 대하여 **weak**(네트워크 synchrony의 부족), **consensus**(가장 긴 체인) 하다. 
+
+- 따라서 만약 리더가 검열을 시도(가장 길지 않은 체인을 semifinalize 시킨다던지)한다면 이는 알아채기 쉽긴 하다. 하지만 이는 네트워크 asynchrony라는 가정이 있기에 이론적으로 검증이 가능하지는 않다. (왜냐하면 리더의 네트워크의 지연에 의하여 우연하게 이루어졌을 수 있기 때문이다.)  
+
+- 그래도 만약 리더가 계속 검열을 시도한다면 의심스러워지긴 할 것이다.  
+
+스팸 채팅을 시도하는 나쁜 멤버가 있다면, 리더는 그 spam chain을 finalize하지 않을 것이고, 다른 멤버들은 그러한 검열에 대하여 나쁘지 않다고 기억할 것이다.  
+```
+
+***
