@@ -361,13 +361,17 @@ Note that if there is a malicious member who tries to spam the chat, the leader 
 ```
 리더가 그저 chain을 `semifinalize`하기만 하고 채팅 서버를 운영하지 않는 이유는 그것이 더 검열에 저항성이 있기 때문이다. 
 
-- full chat server에 비교하여서 가장 긴 chain에 기반한 프로토콜은 total chat ordering에 대하여 **weak**(네트워크 synchrony의 부족), **consensus**(가장 긴 체인) 하다. 
+- full chat server에 비교하여서 가장 긴 chain에 기반한 프로토콜은 total chat ordering에 대하여 **weak** . 
+(네트워크 synchrony의 부족), **consensus**(가장 긴 체인) 하다. 
 
-- 따라서 만약 리더가 검열을 시도(가장 길지 않은 체인을 semifinalize 시킨다던지)한다면 이는 알아채기 쉽긴 하다. 하지만 이는 네트워크 asynchrony라는 가정이 있기에 이론적으로 검증이 가능하지는 않다. (왜냐하면 리더의 네트워크의 지연에 의하여 우연하게 이루어졌을 수 있기 때문이다.)  
+- 따라서 만약 리더가 검열을 시도(가장 길지 않은 체인을 semifinalize 시킨다던지)한다면 이는 알아채기 쉽긴 하다.  
+하지만 이는 네트워크 asynchrony라는 가정이 있기에 이론적으로 검증이 가능하지는 않다.  
+(왜냐하면 리더의 네트워크의 지연에 의하여 우연하게 이루어졌을 수 있기 때문이다.)  
 
 - 그래도 만약 리더가 계속 검열을 시도한다면 의심스러워지긴 할 것이다.  
 
-스팸 채팅을 시도하는 나쁜 멤버가 있다면, 리더는 그 spam chain을 finalize하지 않을 것이고, 다른 멤버들은 그러한 검열에 대하여 나쁘지 않다고 기억할 것이다.  
+스팸 채팅을 시도하는 나쁜 멤버가 있다면, 리더는 그 spam chain을 finalize하지 않을 것이고, 다른 멤버들은 그러한  
+검열에 대하여 나쁘지 않다고 기억할 것이다.  
 ```
 
 ***
