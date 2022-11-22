@@ -386,14 +386,18 @@ In addition to the agenda, the leader can also include *extra-agenda* that don't
 These three transactions are the only exceptions that are not part of the agenda, and included directly by the proposer, ex officio.
 
 ```
-컨센서스 리더(block proposer)는 일단 agenda proposer와 헷갈리지 말아야 한다. 컨센서스 리더는 자격이 있는 안건(만약 여러 개 일 경우에는 하나를 고른다.)을 block에 포함시키고 그것을 제안한다. 만약 자격이 있는 안건이 없을 경우에는 block이 진행되지 않는다.  
+컨센서스 리더(block proposer)는 일단 agenda proposer와 헷갈리지 말아야 한다. 컨센서스 리더는 자격이 있는 안건  
+(만약 여러 개 일 경우에는 하나를 고른다.)을 block에 포함시키고 그것을 제안한다. 만약 자격이 있는 안건이 없을 경우에는   
+block이 진행되지 않는다.  
 
-추가적으로 안건에 대해 리더는 `extra-agend`를 추가할 수 있다. 이것은 거버넌스의 승인이 필요 없지만 그 자체의 proof을 가져서 승인될 수 있어야 한다.  
+추가적으로 안건에 대해 리더는 `extra-agend`를 추가할 수 있다. 이것은 거버넌스의 승인이 필요 없지만 그 자체의 proof을  
+가져서 승인될 수 있어야 한다.  
 
 1. RecordChatLog  
 그 높이에서의 채팅로그이다. 이는 상태를 변화시키지는 않지만 안건에 대하여 거버넌스의 회의록으로 이용이 된다.  
 2. ReportMisBehavior  
-중복 투표를 컨센서스에서 진행하거나 채팅 finalization에 대하여 리더가 실수를 한 경우에 기록되며, 이는 실수를 한 validator에 대하여 voting power slashing이 자동으로 일어나게 해준다.  
+중복 투표를 컨센서스에서 진행하거나 채팅 finalization에 대하여 리더가 실수를 한 경우에 기록되며, 이는 실수를 한   
+validator에 대하여 voting power slashing이 자동으로 일어나게 해준다.  
 3. Delegate/Undelegate  
 이는 어떤 사람에 대하여 voting power를 위임하거나 위임취소를 시키는 것으로, 위임 해제를 시키는 사람의 서명이 필요하다.  
 
